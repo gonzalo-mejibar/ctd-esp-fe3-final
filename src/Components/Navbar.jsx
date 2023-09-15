@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import './styles/Navbar.css';
-import { useOdontoStates } from '../Context/Context';
+import { useDentiStates } from '../Context/Context';
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
 
-  const { state, dispatch } = useOdontoStates(); 
+  const { state, dispatch } = useDentiStates(); 
 
   // Función para cambiar el tema
   const toggleTheme = () => {

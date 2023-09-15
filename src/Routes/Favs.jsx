@@ -1,21 +1,21 @@
 import React from "react";
 import Card from "../Components/Card";
-import { useOdontoStates } from "../Context/Context";
+import { useDentiStates } from "../Context/Context";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Favs = () => {
 
-  const {state} = useOdontoStates()
+  const {state} = useDentiStates()
 
   
 
   return (
     <>
-      <h1>Dentists Favs</h1>
+      <h1>Dentistas Favs</h1>
       <div className="card-grid">
         {state.favs.map(fav =>
-        <Card odontologo={fav} key={fav.id}/>)}
+        <Card dentista={fav} key={fav.id}/>)}
       </div>
     </>
   );

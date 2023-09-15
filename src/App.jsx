@@ -6,13 +6,13 @@ import Favs from "./Routes/Favs";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Detail from "./Routes/Detail";
-import { useOdontoStates } from "./Context/Context";
+import { useDentiStates } from "./Context/Context";
 
 
 
 function App() {
 
-  const { state } = useOdontoStates(); 
+  const { state } = useDentiStates(); 
   const bodyClassName = `body ${state.theme}`
   return (
     <html className= {bodyClassName}>

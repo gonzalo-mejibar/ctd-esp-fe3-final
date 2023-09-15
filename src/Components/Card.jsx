@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useOdontoStates } from '../Context/Context'
+import { useDentiStates } from '../Context/Context'
 
 
 
-const Card = ({ odontologo }) => {
-  const {state, dispatch} = useOdontoStates()
-  const findOdontologo = state.favs.find(fav => fav.id == odontologo.id)
+const Card = ({ dentista }) => {
+  const {state, dispatch} = useDentiStates()
+  const findDentista = state.favs.find(fav => fav.id == dentista.id)
 
   const addFav = ()=>{
-    if(findOdontologo){
-      dispatch({type: 'DELETE_FAV', payload: findOdontologo})
+    if(findDentista){
+      dispatch({type: 'DELETE_FAV', payload: findDentista})
     } else {
-      dispatch({type: 'ADD_FAV', payload: odontologo})
+      dispatch({type: 'ADD_FAV', payload: dentista})
     }
     // 
     
@@ -22,14 +22,14 @@ const Card = ({ odontologo }) => {
 
   return (
     <div className="card">
-        <Link to={'/detail/' + odontologo.id}>  
-            <h3>Name: {odontologo.name}</h3>
+        <Link to={'/detail/' + dentista.id}>  
             <img src="/images/doctor.jpg" alt="" className="card-image"/>
-            <h4>Username: {odontologo.username}</h4>
+            <h3>{dentista.name}</h3>
+            <h4>{dentista.username}</h4>
         </Link>
 
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton"> {findOdontologo ? <img className="icon" src="/images/fav.png" alt="fav"/> : <img className="icon" src="/images/unfav.png" alt="fav"/>}</button>
+        <button onClick={addFav} className="favButton">{findDentista ? '🌟' : '⭐'}</button>
         {/* () => setFavs((prevFavs) => [...prevFavs, odontologo]) */}
     </div>
   );

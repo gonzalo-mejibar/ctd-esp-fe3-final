@@ -1,21 +1,21 @@
 import axios from 'axios'
 import {useContext, createContext, useState, useReducer, useEffect} from 'react'
 
-const OdontoStates = createContext()
+const DentiStates = createContext()
 
 
 const reducer = (state, action) => {
     switch(action.type){
-        case 'GET_ODONTOLOGOS':
-            return {...state, odontologos: action.payload}
-        case 'GET_ODONTOLOGO':
-            return {...state, odontologo: action.payload}
+        case 'GET_DENTISTAS':
+            return {...state, dentistas: action.payload}
+        case 'GET_DENTISTA':
+            return {...state, dentista: action.payload}
         case 'ADD_FAV':
             return {...state, favs: [...state.favs, action.payload]}
         case 'DELETE_FAV':
             return {...state, favs: state.favs.filter(fav => fav.id !== action.payload.id)}
         case 'SWITCH_THEME':
-            return  {...state, theme: state.theme === '' ? 'dark' : '' }; // Cambia el tema entre "light" y "dark"
+            return  {...state, theme: state.theme === '' ? 'dark' : '' }; 
         default:
             throw new Error()
     }
@@ -27,8 +27,8 @@ const initialFavState = localFavs ? localFavs : []
 
 
 const initialState = {
-    odontologos: [],
-    odontologo: {},
+    dentistas: [],
+    dentista: {},
     favs: initialFavState,
     theme: ''
 }
@@ -36,7 +36,7 @@ const initialState = {
 
 const Context = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
-    // const [odontologos, setOdontologo] = useState([])
+    // const [dentistas, setDentista] = useState([])
     // const [favs, setFavs] = useState(initialFavState)
     //const [theme, setTheme] = useState(true) --> Modo oscuro
     
@@ -44,7 +44,7 @@ const Context = ({children}) => {
 
     useEffect(() => {
         axios(url)
-        .then(res => dispatch({type: 'GET_ODONTOLOGOS', payload: res.data}))
+        .then(res => dispatch({type: 'GET_DENTISTAS', payload: res.data}))
     }, [])
 
     useEffect(() => {
@@ -53,12 +53,12 @@ const Context = ({children}) => {
 
 
     return (
-        <OdontoStates.Provider value={{state,dispatch}}>
+        <DentiStates.Provider value={{state,dispatch}}>
             {children}
-        </OdontoStates.Provider>
+        </DentiStates.Provider>
     )
 }
 
 export default Context
 
-export const useOdontoStates = () => useContext(OdontoStates)
+export const useDentiStates = () => useContext(DentiStates)
